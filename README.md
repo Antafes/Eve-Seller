@@ -16,4 +16,4 @@ During the migrations an admin user with the following login data is created:
 username: Admin
 password: Admin123!
 
-*Always* change the admin password right after the installation and migration!
+**Always** change the admin password right after the installation and migration!
