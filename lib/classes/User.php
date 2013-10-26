@@ -37,6 +37,11 @@ class User
 	protected $admin;
 
 	/**
+	 * @var boolean
+	 */
+	protected $active;
+
+	/**
 	 * Get the user that wants to log in.
 	 *
 	 * @param string $name
@@ -49,7 +54,6 @@ class User
 			SELECT *
 			FROM es_users
 			WHERE name = '.sqlval($name).'
-				AND active
 				AND !deleted
 		';
 		$userData = query($sql);
@@ -65,6 +69,7 @@ class User
 			$object->salt     = $userData['salt'];
 			$object->email    = $userData['email'];
 			$object->admin    = !!$userData['admin'];
+			$object->active   = !!$userData['active'];
 
 			return $object;
 		}
@@ -84,7 +89,6 @@ class User
 			SELECT *
 			FROM es_users
 			WHERE userId = '.sqlval($userId).'
-				AND active
 				AND !deleted
 		';
 		$userData = query($sql);
@@ -96,6 +100,7 @@ class User
 		$object->salt     = $userData['salt'];
 		$object->email    = $userData['email'];
 		$object->admin    = !!$userData['admin'];
+		$object->active   = !!$userData['active'];
 
 		return $object;
 	}
@@ -180,6 +185,17 @@ class User
 		return $this->admin;
 	}
 
+	/**
+	 * @return boolean
+	 */
+	public function getStatus()
+	{
+		return $this->active;
+	}
+
+	/**
+	 * @param string $name
+	 */
 	public function setName($name)
 	{
 		$this->name = $name;
@@ -207,12 +223,43 @@ class User
 		query($sql);
 	}
 
+	/**
+	 * @param string $email
+	 */
 	public function setEmail($email)
 	{
 		$this->email = $email;
 		$sql = '
 			UPDATE es_users
 			SET email = '.sqlval($this->email).'
+			WHERE userId = '.sqlval($this->userId).'
+		';
+		query($sql);
+	}
+
+	/**
+	 * Activate the current user.
+	 */
+	public function activate()
+	{
+		$sql = '
+			UPDATE es_users
+			SET active = 1
+			WHERE userId = '.sqlval($this->userId).'
+		';
+		query($sql);
+		$this->active = true;
+	}
+
+	/**
+	 * @param boolean $admin
+	 */
+	public function setAdmin($admin)
+	{
+		$this->admin = $admin;
+		$sql = '
+			UPDATE es_users
+			SET admin = '.sqlval($admin ? 1 : 0).'
 			WHERE userId = '.sqlval($this->userId).'
 		';
 		query($sql);

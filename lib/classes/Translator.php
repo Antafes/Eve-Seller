@@ -127,9 +127,9 @@ class Translator
 		if (is_array($key))
 		{
 			foreach ($key as &$item)
-			{
 				$item = $this->getTranslation($item);
-			}
+
+			return $key;
 		}
 
 		if (array_key_exists($key, $this->translations[$this->currentLanguage]))

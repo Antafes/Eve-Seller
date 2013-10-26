@@ -21,3 +21,32 @@ a.button
 	color: #000000;
 	border-radius: 3px;
 }
+
+table.collapse
+{
+	border-collapse: collapse;
+}
+
+table.collapse td,
+table.collapse th
+{
+	border-right: 1px solid #b7b7b7;
+	padding: 4px;
+}
+
+table.collapse td:last-child,
+table.collapse th:last-child
+{
+	border-right: 0 none;
+}
+
+tr.odd
+{
+	background-color: #dedede;
+}
+
+td.centered,
+th.centered
+{
+	text-align: center;
+}

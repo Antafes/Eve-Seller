@@ -1,5 +1,6 @@
 <div id="menu">
 	{if $smarty.session.userId}
+		<a class="button" href="index.php?page=Index">{$translator->getTranslation('index')}</a>
 		<a class="button" href="index.php?page=AddOrder">{$translator->getTranslation('addOrder')}</a>
 		<a class="button" href="index.php?page=OwnOrders">{$translator->getTranslation('ownOrders')}</a>
 		<a class="button" href="index.php?page=CorporationOrders">{$translator->getTranslation('corporationOrders')}</a>
