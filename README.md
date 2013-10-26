@@ -9,7 +9,6 @@ Installation
 ------------
 
 Simply upload all files on your server.
-Import the MySQL dump inside db_migrations/files/cru11-mysql5-innoDB-v1.zip into your database.
 Now go to http://your.comain/db_migrations/migrations.php and run all migrations from top to bottom.
 During the migrations an admin user with the following login data is created:
 
