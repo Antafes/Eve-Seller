@@ -50,3 +50,11 @@ th.centered
 {
 	text-align: center;
 }
+
+.error
+{
+	display: inline;
+	border: 1px solid #ff3800;
+	border-radius: 3px;
+	padding: 3px;
+}
