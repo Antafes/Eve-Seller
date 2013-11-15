@@ -10,6 +10,11 @@ class Display
 		'Header',
 	);
 
+	/**
+	 * Display the given page.
+	 *
+	 * @param string $pageName
+	 */
 	public function showPage($pageName)
 	{
 		$pageName = $this->checkPage($pageName);
@@ -29,6 +34,12 @@ class Display
 		$page->render();
 	}
 
+	/**
+	 * Check if the page is in the list of unallowed pages. If so, return 'Index'.
+	 *
+	 * @param string $pageName
+	 * @return string
+	 */
 	protected function checkPage($pageName)
 	{
 		if (in_array($pageName, $this->unallowedPages))

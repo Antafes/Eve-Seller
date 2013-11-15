@@ -37,6 +37,11 @@ class User
 	protected $admin;
 
 	/**
+	 * @var string
+	 */
+	protected $orderDuration;
+
+	/**
 	 * @var boolean
 	 */
 	protected $active;
@@ -63,13 +68,14 @@ class User
 		if (strcasecmp($name, $userData['name']) === 0 && $encPassword == $userData['password'])
 		{
 			$object = new self();
-			$object->userId   = $userData['userId'];
-			$object->name     = $userData['name'];
-			$object->password = $userData['password'];
-			$object->salt     = $userData['salt'];
-			$object->email    = $userData['email'];
-			$object->admin    = !!$userData['admin'];
-			$object->active   = !!$userData['active'];
+			$object->userId        = $userData['userId'];
+			$object->name          = $userData['name'];
+			$object->password      = $userData['password'];
+			$object->salt          = $userData['salt'];
+			$object->email         = $userData['email'];
+			$object->admin         = !!$userData['admin'];
+			$object->orderDuration = $userData['orderDuration'];
+			$object->active        = !!$userData['active'];
 
 			return $object;
 		}
@@ -94,13 +100,14 @@ class User
 		$userData = query($sql);
 
 		$object = new self();
-		$object->userId   = intval($userData['userId']);
-		$object->name     = $userData['name'];
-		$object->password = $userData['password'];
-		$object->salt     = $userData['salt'];
-		$object->email    = $userData['email'];
-		$object->admin    = !!$userData['admin'];
-		$object->active   = !!$userData['active'];
+		$object->userId        = intval($userData['userId']);
+		$object->name          = $userData['name'];
+		$object->password      = $userData['password'];
+		$object->salt          = $userData['salt'];
+		$object->email         = $userData['email'];
+		$object->admin         = !!$userData['admin'];
+		$object->orderDuration = $userData['orderDuration'];
+		$object->active        = !!$userData['active'];
 
 		return $object;
 	}
@@ -194,6 +201,14 @@ class User
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getOrderDuration()
+	{
+		return $this->orderDuration;
+	}
+
+	/**
 	 * @param string $name
 	 */
 	public function setName($name)
@@ -260,6 +275,20 @@ class User
 		$sql = '
 			UPDATE es_users
 			SET admin = '.sqlval($admin ? 1 : 0).'
+			WHERE userId = '.sqlval($this->userId).'
+		';
+		query($sql);
+	}
+
+	/**
+	 * @param string $orderDuration
+	 */
+	public function setOrderDuration($orderDuration)
+	{
+		$this->orderDuration = $orderDuration;
+		$sql = '
+			UPDATE es_users
+			SET orderDuration = '.sqlval($orderDuration).'
 			WHERE userId = '.sqlval($this->userId).'
 		';
 		query($sql);

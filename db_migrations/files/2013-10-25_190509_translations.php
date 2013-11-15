@@ -19,7 +19,7 @@ $DB_MIGRATION = array(
 				PRIMARY KEY (`languageId`)
 			)
 			COLLATE="utf8_bin"
-			ENGINE=MyISAM
+			ENGINE=InnoDB
 		');
 
 		$results[] = query_raw('
@@ -32,7 +32,7 @@ $DB_MIGRATION = array(
 				PRIMARY KEY (`translationId`)
 			)
 			COLLATE="utf8_bin"
-			ENGINE=MyISAM
+			ENGINE=InnoDB
 		');
 
 		$results[] = query_raw('

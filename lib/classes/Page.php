@@ -20,6 +20,9 @@ abstract class Page
 		$this->template->setTemplate($template);
 	}
 
+	/**
+	 * Render and output the template
+	 */
 	public function render()
 	{
 		$this->template->render();
@@ -30,5 +33,8 @@ abstract class Page
 		return $this->template;
 	}
 
+	/**
+	 * Process possibly entered data of the page.
+	 */
 	abstract public function process();
 }

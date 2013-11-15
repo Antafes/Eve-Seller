@@ -30,8 +30,7 @@ class Template
 		$this->smarty = new Smarty();
 		$this->smarty->setTemplateDir('templates/');
 
-		$translator = new Translator();
-		$translator->setCurrentLanguage(Translator::getUserLanguage());
+		$translator = Translator::getInstance();
 		$this->translator = $translator;
 		$this->smarty->assign('translator', $translator);
 		$this->smarty->assign('languages', $this->translator->getAllLanguages());
@@ -76,6 +75,7 @@ class Template
 	public function render()
 	{
 		echo $this->smarty->display($this->template.'.tpl');
+		unset($_SESSION['scripts']);
 	}
 
 	/**

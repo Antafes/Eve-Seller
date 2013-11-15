@@ -23,7 +23,7 @@ $DB_MIGRATION = array(
 				PRIMARY KEY (`userId`)
 			)
 			COLLATE="utf8_bin"
-			ENGINE=MyISAM
+			ENGINE=InnoDB
 		');
 
 		$results[] = query_raw('

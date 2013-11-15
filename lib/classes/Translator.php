@@ -7,6 +7,11 @@
 class Translator
 {
 	/**
+	 * @var \self
+	 */
+	protected static $translator;
+
+	/**
 	 * @var array
 	 */
 	protected $languages;
@@ -21,10 +26,27 @@ class Translator
 	 */
 	protected $translations;
 
-	function __construct()
+	private function __construct()
 	{
 		$this->fillLanguages();
 		$this->fillTranslations();
+	}
+
+	/**
+	 * Get the singleton instance.
+	 *
+	 * @return \self
+	 */
+	public static function getInstance()
+	{
+		if (!self::$translator)
+		{
+			$translator = new self();
+			$translator->setCurrentLanguage($_COOKIE['esLanguage']);
+			self::$translator = $translator;
+		}
+
+		return self::$translator;
 	}
 
 	/**
@@ -148,7 +170,7 @@ class Translator
 		if (!$languageId)
 		{
 			$iso2code   = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-			$language   = self::getLanguageByIso2Code($iso2code);
+			$language   = Model\Language::getLanguageByIso2Code($iso2code);
 			$languageId = $language->getLanguageId();
 		}
 

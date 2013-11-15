@@ -20,6 +20,9 @@ class Options extends \Page
 		$this->user = \User::getUserById($_SESSION['userId']);
 	}
 
+	/**
+	 * Process possibly entered data of the page.
+	 */
 	public function process()
 	{
 		if (!$_POST['generalOptions'] && !$_POST['passwordOptions'])
@@ -44,6 +47,9 @@ class Options extends \Page
 		}
 	}
 
+	/**
+	 * Render and output the template
+	 */
 	public function render()
 	{
 		$this->template->assign('user', $this->user);
@@ -51,6 +57,12 @@ class Options extends \Page
 		parent::render();
 	}
 
+	/**
+	 * Change and save general options of the user.
+	 *
+	 * @param string $username
+	 * @param string $email
+	 */
 	protected function changeGeneralOptions($username, $email)
 	{
 		if (!$username || !$email)
@@ -64,6 +76,12 @@ class Options extends \Page
 		$this->template->assign('messageGeneral', 'generalSuccess');
 	}
 
+	/**
+	 * Change the users password.
+	 *
+	 * @param string $password
+	 * @param string $repeatPassword
+	 */
 	protected function changePassword($password, $repeatPassword)
 	{
 		if (!$password || !$repeatPassword)

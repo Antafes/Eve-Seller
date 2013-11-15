@@ -22,7 +22,7 @@ if ($_POST['sql'] || $_POST['sql_file'])
 
 	$sql_snippets = explode(';', $sql_content);
 
-	echo '<textarea rows="20" cols="80">';
+	echo '<textarea rows="20" cols="80">'."\n";
 	foreach ($sql_snippets as $sql)
 	{
 		if (trim($sql))
@@ -51,11 +51,11 @@ if ($_POST['sql'] || $_POST['sql_file'])
 
 			if (substr($sqlString, 0, 4) === 'DROP')
 			{
-				echo "\t\t".'query_raw(\''."\n".$sqlString."\t\t".'\');'."\n";
+				echo "\n\t\t".'query_raw(\''."\n".$sqlString."\t\t".'\');';
 			}
 			else
 			{
-				echo "\t\t".'$results[] = query_raw(\''."\n".$sqlString."\t\t".'\');'."\n\n";
+				echo "\n\n\t\t".'$results[] = query_raw(\''."\n".$sqlString."\t\t".'\');';
 			}
 		}
 	}

@@ -23,11 +23,6 @@
 					<input type="submit" value="{$translator->getTranslation('login')}" />
 				</td>
 			</tr>
-			<tr>
-				<td colspan="2">
-					<a href="index.php?page=Register">{$translator->getTranslation('register')}</a>
-				</td>
-			</tr>
 		</table>
 	</form>
 </div>
