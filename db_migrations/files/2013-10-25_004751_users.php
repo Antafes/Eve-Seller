@@ -17,7 +17,7 @@ $DB_MIGRATION = array(
 				`password` VARCHAR(255) NOT NULL COLLATE "utf8_bin",
 				`salt` VARCHAR(255) NOT NULL COLLATE "utf8_bin",
 				`email` VARCHAR(255) NOT NULL COLLATE "utf8_bin",
-				`active` TINYINT(1) NOT NULL "0",
+				`active` TINYINT(1) NOT NULL DEFAULT "0",
 				`admin` TINYINT(1) NOT NULL DEFAULT "0",
 				`deleted` TINYINT(1) NOT NULL,
 				PRIMARY KEY (`userId`)
