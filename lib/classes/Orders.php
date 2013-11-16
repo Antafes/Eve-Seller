@@ -41,6 +41,7 @@ class Orders
 			FROM es_orders
 			WHERE `userId` = '.sqlval($userId).'
 				AND amountSold < amount
+				AND !deleted
 			ORDER BY '.sqlval($orderBy, false).'
 		';
 		$orders = query($sql, true);
@@ -107,6 +108,7 @@ class Orders
 			FROM es_orders
 			WHERE sellingForUser = '.sqlval($sellingForUser).'
 				AND amountSold < amount
+				AND !deleted
 			ORDER BY '.sqlval($orderBy, false).'
 		';
 		$data = query($sql, true);

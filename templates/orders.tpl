@@ -58,7 +58,7 @@
 					<td class="createDatetime">{$order->getFormattedCreateDatetime()}</td>
 					<td class="endDatetime">{$order->getFormattedEndDatetime()}</td>
 					<td class="sold">
-						<a href="javascript:;" data-orderid="{$order->getOrderId()}">{$translator->getTranslation('markSold')}</a>
+						<a href="javascript:;" data-orderid="{$order->getOrderId()}">{$translator->getTranslation('markAsSold')}</a>
 					</td>
 				</tr>
 			{foreachelse}
