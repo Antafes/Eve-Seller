@@ -40,7 +40,7 @@ class Orders
 				it.`typeName`,
 				eo.amount * eo.price AS sum
 			FROM es_orders AS eo
-			JOIN invtypes AS it ON (it.`typeID` = eo.`itemId`)
+			JOIN invTypes AS it ON (it.`typeID` = eo.`itemId`)
 			WHERE eo.`userId` = '.sqlval($userId).'
 				AND eo.amountSold < eo.amount
 				AND NOW() <= eo.`endDatetime`
@@ -110,7 +110,7 @@ class Orders
 				it.typeName,
 				amount * price AS sum
 			FROM es_orders AS eo
-			JOIN invtypes AS it ON (it.`typeID` = eo.`itemId`)
+			JOIN invTypes AS it ON (it.`typeID` = eo.`itemId`)
 			WHERE eo.`userId` = '.sqlval($userId).'
 				AND eo.sellingForUser = '.sqlval($sellingForUser).'
 				AND eo.amountSold < eo.amount

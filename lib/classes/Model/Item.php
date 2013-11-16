@@ -28,7 +28,7 @@ class Item
 			SELECT
 				`typeID`,
 				`typeName`
-			FROM invtypes
+			FROM invTypes
 			WHERE `typeID` = '.sqlval($itemId).'
 		';
 		$itemData = query($sql);
@@ -55,9 +55,9 @@ class Item
 				it.`typeID`,
 				it.`typeName`,
 				ig.groupName
-			FROM invtypes AS it
-			JOIN invgroups AS ig USING (groupID)
-			JOIN invcategories AS ic USING (categoryID)
+			FROM invTypes AS it
+			JOIN invGroups AS ig USING (groupID)
+			JOIN invCategories AS ic USING (categoryID)
 			WHERE ic.published
 				AND ig.published
 			ORDER BY ic.categoryName, ig.groupName, it.typeName
