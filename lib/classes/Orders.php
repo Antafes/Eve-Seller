@@ -146,8 +146,9 @@ class Orders
 		$data = query($sql);
 
 		$orderIdList = array();
-		foreach ($data as $row)
-			$orderIdList[$row['orderId']] = $row['orderId'];
+		if ($data)
+			foreach ($data as $row)
+				$orderIdList[$row['orderId']] = $row['orderId'];
 
 		return $orderIdList;
 	}
