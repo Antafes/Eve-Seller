@@ -19,7 +19,6 @@ $GLOBALS['config']['debugSmarty'] = false;
 //paths
 $GLOBALS['config']['dir_ws'] = 'http://localhost';
 $GLOBALS['config']['dir_ws_index'] = 'http://localhost/index.php';
-$GLOBALS['config']['baseDir'] = '/var/www/';
 
 $GLOBALS['config']['migrations_dir'] = '';
 $GLOBALS['config']['dir_ws_migrations'] = '';

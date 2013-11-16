@@ -28,7 +28,7 @@ class Template
 	function __construct()
 	{
 		$this->smarty = new Smarty();
-		$this->smarty->setTemplateDir($GLOBALS['config']['baseDir'].'templates/');
+		$this->smarty->setTemplateDir(__DIR__.'/../../templates/');
 
 		$translator = Translator::getInstance();
 		$this->translator = $translator;
