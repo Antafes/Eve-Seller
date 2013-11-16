@@ -13,7 +13,15 @@ if (!$page)
 
 if ($_GET['language'])
 {
-	Translator::setUserLanguage($_GET['language']);
+	$translator = \Translator::getInstance();
+	$translator->setCurrentLanguage($_GET['language']);
+
+	if ($_SESSION['userId'])
+	{
+		$user = \User::getUserById($_SESSION['userId']);
+		$user->setLanguageId($_GET['language']);
+	}
+
 	redirect('index.php?page='.$page);
 }
 

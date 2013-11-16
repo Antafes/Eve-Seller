@@ -7,16 +7,22 @@
 class Translator
 {
 	/**
+	 * Singleton instance of the translator
+	 *
 	 * @var \self
 	 */
 	protected static $translator;
 
 	/**
+	 * An array of Language objects.
+	 *
 	 * @var array
 	 */
 	protected $languages;
 
 	/**
+	 * The id of the current language.
+	 *
 	 * @var integer
 	 */
 	protected $currentLanguage;
@@ -110,6 +116,12 @@ class Translator
 	 */
 	public function getCurrentLanguage()
 	{
+		if (!$this->currentLanguage)
+		{
+			$this->currentLanguage = $this->getUserLanguage();
+			$this->setUserLanguage($this->currentLanguage);
+		}
+
 		return $this->currentLanguage;
 	}
 
@@ -121,7 +133,7 @@ class Translator
 	public function setCurrentLanguage($currentLanguage)
 	{
 		$this->currentLanguage = $currentLanguage;
-		self::setUserLanguage($this->currentLanguage);
+		$this->setUserLanguage($this->currentLanguage);
 	}
 
 	/**
@@ -163,7 +175,7 @@ class Translator
 	/**
 	 * @return integer
 	 */
-	public static function getUserLanguage()
+	protected function getUserLanguage()
 	{
 		$languageId = $_COOKIE['esLanguage'];
 
@@ -180,7 +192,7 @@ class Translator
 	/**
 	 * @param integer $languageId
 	 */
-	public static function setUserLanguage($languageId)
+	protected function setUserLanguage($languageId)
 	{
 		setcookie('esLanguage', $languageId, time() + 86400);
 	}

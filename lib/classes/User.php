@@ -42,6 +42,11 @@ class User
 	protected $orderDuration;
 
 	/**
+	 * @var integer
+	 */
+	protected $languageId;
+
+	/**
 	 * @var boolean
 	 */
 	protected $active;
@@ -75,6 +80,7 @@ class User
 			$object->email         = $userData['email'];
 			$object->admin         = !!$userData['admin'];
 			$object->orderDuration = $userData['orderDuration'];
+			$object->languageId    = $userData['languageId'];
 			$object->active        = !!$userData['active'];
 
 			return $object;
@@ -209,6 +215,14 @@ class User
 	}
 
 	/**
+	 * @return integer
+	 */
+	public function getLanguageId()
+	{
+		return $this->languageId;
+	}
+
+	/**
 	 * @param string $name
 	 */
 	public function setName($name)
@@ -290,6 +304,20 @@ class User
 			UPDATE es_users
 			SET orderDuration = '.sqlval($orderDuration).'
 			WHERE userId = '.sqlval($this->userId).'
+		';
+		query($sql);
+	}
+
+	/**
+	 * @param integer $languageId
+	 */
+	public function setLanguageId($languageId)
+	{
+		$this->languageId = $languageId;
+		$sql = '
+			UPDATE es_users
+			SET `languageId` = '.sqlval($languageId).'
+			WHERE `userId` = '.sqlval($this->userId).'
 		';
 		query($sql);
 	}

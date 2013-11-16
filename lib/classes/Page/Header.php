@@ -29,7 +29,8 @@ class Header extends \Page
 		$this->template->loadJs('header');
 
 		$this->createMenu();
-		$language = \Model\Language::getLanguageById(\Translator::getUserLanguage());
+		$translator = \Translator::getInstance();
+		$language = \Model\Language::getLanguageById($translator->getCurrentLanguage());
 		$this->template->assign('languageCode', $language->getIso2code());
 	}
 

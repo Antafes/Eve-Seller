@@ -34,6 +34,8 @@ class Login extends \Page
 		if ($user)
 		{
 			$_SESSION['userId'] = $user->getUserId();
+			$translator = \Translator::getInstance();
+			$translator->setCurrentLanguage($user->getLanguageId());
 			redirect('index.php?page=Index');
 		}
 		else
