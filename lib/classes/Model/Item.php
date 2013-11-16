@@ -65,8 +65,9 @@ class Item
 		$items = query($sql, true);
 
 		$groupedItems = array();
-		foreach ($items as $item)
-			$groupedItems[$item['groupName']][$item['typeID']] = $item['typeName'];
+		if ($items)
+			foreach ($items as $item)
+				$groupedItems[$item['groupName']][$item['typeID']] = $item['typeName'];
 
 		return $groupedItems;
 	}
