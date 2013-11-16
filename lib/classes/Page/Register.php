@@ -38,13 +38,13 @@ class Register extends \Page
 			return;
 		}
 
-		if (EsUser::checkUsername($username))
+		if (\User::checkUsername($username))
 		{
 			$this->template->assign('error', 'usernameAlreadyInUse');
 			return;
 		}
 
-		if (EsUser::createUser($username, $password, $email))
+		if (\User::createUser($username, $password, $email))
 			$this->template->assign('message', 'registrationSuccessful');
 		else
 			$this->template->assign('error', 'registrationUnsuccessful');
