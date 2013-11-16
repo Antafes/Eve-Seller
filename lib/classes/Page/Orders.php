@@ -32,7 +32,12 @@ class Orders extends \Page
 		if (!$_GET['filterOrders'])
 			return;
 
-		$this->template->assign('orders', \Orders::getOrdersBySellingFor($_GET['filterOrders'], $_GET['orderBy']));
+		$this->template->assign(
+			'orders',
+			\Orders::getOrdersBySellingFor(
+				$_SESSION['userId'], $_GET['filterOrders'], $_GET['orderBy']
+			)
+		);
 	}
 
 	public function render()

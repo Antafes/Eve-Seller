@@ -9,7 +9,8 @@ Installation
 ------------
 
 Simply upload all files on your server.
-Now go to http://your.comain/db_migrations/migrations.php and run all migrations from top to bottom.
+Import db_migrations/invTypes.sql, db_migrations/invGroups.sql and db_migrations/invCategories.sql in your database.
+Now go to http://your.domain/db_migrations/migrations.php and run all migrations from top to bottom.
 During the migrations an admin user with the following login data is created:
 
 username: Admin

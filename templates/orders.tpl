@@ -18,7 +18,7 @@
 		<thead>
 			<tr>
 				<th class="item">
-					<a href="index.php?page=Orders&amp;filterOrders={$smarty.get.filterOrders}&amp;orderBy=item">{$translator->getTranslation('item')}</a>
+					<a href="index.php?page=Orders&amp;filterOrders={$smarty.get.filterOrders}&amp;orderBy=typeName">{$translator->getTranslation('item')}</a>
 				</th>
 				<th class="singlePrice">
 					<a href="index.php?page=Orders&amp;filterOrders={$smarty.get.filterOrders}&amp;orderBy=price">{$translator->getTranslation('singlePrice')}</a>
@@ -47,7 +47,7 @@
 		<tbody>
 			{foreach from=$orders item='order'}
 				<tr class="{cycle values='odd,even'}">
-					<td class="item">{$order->getItem()}</td>
+					<td class="item">{$order->getItem()->getTypeName()}</td>
 					<td class="singlePrice">{$order->getFormattedPrice()}</td>
 					<td class="amount">{$order->getFormattedAmount()}</td>
 					<td class="amountSold">{$order->getFormattedAmountSold()}</td>

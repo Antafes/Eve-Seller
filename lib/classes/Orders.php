@@ -32,16 +32,19 @@ class Orders
 	protected function fillOrders($userId, $orderBy)
 	{
 		if (!$orderBy)
-			$orderBy = 'item';
+			$orderBy = 'typeName';
 
 		$sql = '
 			SELECT
-				orderId,
-				amount * price AS sum
-			FROM es_orders
-			WHERE `userId` = '.sqlval($userId).'
-				AND amountSold < amount
-				AND !deleted
+				eo.`orderId`,
+				it.`typeName`,
+				eo.amount * eo.price AS sum
+			FROM es_orders AS eo
+			JOIN invtypes AS it ON (it.`typeID` = eo.`itemId`)
+			WHERE eo.`userId` = '.sqlval($userId).'
+				AND eo.amountSold < eo.amount
+				AND NOW() <= eo.`endDatetime`
+				AND !eo.deleted
 			ORDER BY '.sqlval($orderBy, false).'
 		';
 		$orders = query($sql, true);
@@ -96,19 +99,23 @@ class Orders
 	 * @param string $sellingForUser
 	 * @return array
 	 */
-	public static function getOrdersBySellingFor($sellingForUser, $orderBy)
+	public static function getOrdersBySellingFor($userId, $sellingForUser, $orderBy)
 	{
 		if (!$orderBy)
-			$orderBy = 'item';
+			$orderBy = 'itemId';
 
 		$sql = '
 			SELECT
-				orderId,
+				eo.orderId,
+				it.typeName,
 				amount * price AS sum
-			FROM es_orders
-			WHERE sellingForUser = '.sqlval($sellingForUser).'
-				AND amountSold < amount
-				AND !deleted
+			FROM es_orders AS eo
+			JOIN invtypes AS it ON (it.`typeID` = eo.`itemId`)
+			WHERE eo.`userId` = '.sqlval($userId).'
+				AND eo.sellingForUser = '.sqlval($sellingForUser).'
+				AND eo.amountSold < eo.amount
+				AND NOW() <= eo.`endDatetime`
+				AND !eo.deleted
 			ORDER BY '.sqlval($orderBy, false).'
 		';
 		$data = query($sql, true);
@@ -118,5 +125,30 @@ class Orders
 			$orders[] = Model\Order::getOrderById($order['orderId']);
 
 		return $orders;
+	}
+
+	/**
+	 * Get a list of all currently active orders.
+	 *
+	 * @param integer $userId
+	 * @return array
+	 */
+	public static function getOrderIdList($userId)
+	{
+		$sql = '
+			SELECT `orderId`
+			FROM es_orders
+			WHERE `userId` = '.sqlval($userId).'
+				AND amountSold < amount
+				AND NOW() <= `endDatetime`
+				AND !deleted
+		';
+		$data = query($sql);
+
+		$orderIdList = array();
+		foreach ($data as $row)
+			$orderIdList[$row['orderId']] = $row['orderId'];
+
+		return $orderIdList;
 	}
 }

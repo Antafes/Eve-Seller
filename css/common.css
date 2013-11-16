@@ -79,10 +79,7 @@ table.orders
 	border-collapse: collapse;
 }
 
-table.orders,
-table.orders tr,
-table.orders td,
-table.orders th
+table.orders tr
 {
 	border: 1px solid #000000;
 }
@@ -91,6 +88,29 @@ table.orders td,
 table.orders th
 {
 	padding: 5px;
+}
+
+table.orders thead
+{
+	display: block;
+}
+
+table.orders thead tr
+{
+	border-bottom-width: 2px;
+}
+
+table.orders tbody
+{
+	display: block;
+	height: 700px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+table.orders tbody tr:first-child
+{
+	border-top: 0 none;
 }
 
 table.orders .item

@@ -41,7 +41,7 @@ class Translator
 	/**
 	 * Get the singleton instance.
 	 *
-	 * @return \self
+	 * @return Translator
 	 */
 	public static function getInstance()
 	{
