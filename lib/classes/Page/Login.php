@@ -10,7 +10,7 @@ class Login extends \Page
 {
 	function __construct()
 	{
-		parent::__construct('Login');
+		parent::__construct('login');
 	}
 
 	public function process()
